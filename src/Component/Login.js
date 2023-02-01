@@ -1,12 +1,13 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 // import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleApi } from "../Reudcer/loginreducer";
 function Login() {
   let navigate = useNavigate();
+  const login = useSelector(state => state.loginglobal);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +18,7 @@ function Login() {
   const handlepassword = (e) => {
     setPassword(e.target.value);
   };
-  
+  // logged in through normal axios process 
   //  const handleApi = (e) => {
   //   e.preventDefault();
   //   console.log({email,password})
@@ -34,12 +35,13 @@ function Login() {
   //     alert("INVALID USERNAME OR PASSWORD")
   //   });
   //  }
-
+  useEffect(() => {
+    console.log(login)
+  }, [login])
   const handleCLICK = (e) => {
     e.preventDefault();
-    dispatch(handleApi({ email, password }));
-    // alert("SUCCESSFULL LOGIN");
-    // navigate("/");
+    dispatch(handleApi({ email, password }))
+   
   };
 
   return (

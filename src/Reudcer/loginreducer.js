@@ -2,13 +2,12 @@ import axios from "axios";
 
 export const handleApi = (data) => {
   return async (dispatch) => {
-    const result = {};
+    let result = {};
     try {
       result = await axios.post('https://reqres.in/api/login', data);
       if (result) {
         dispatch({ type: "LOGIN_SUCESS", payload: result });
-      } else {
-        dispatch({ type: "LOGIN_FAIL" });
+        localStorage.setItem('token', result.data.token)
       }
     } catch (err) {
       dispatch({ type: "LOGIN_FAIL" });
