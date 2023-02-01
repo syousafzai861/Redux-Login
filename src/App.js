@@ -26,7 +26,7 @@ const [password, setPassword] = useState('');
     alert("LOGGED IN SUCCESSFULLY")
   })
   .catch((error) => {
-    console.log(error);
+    alert("INVALID USERNAME OR PASSWORD")
   });
  }
   return (
